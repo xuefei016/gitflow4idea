@@ -32,6 +32,10 @@ public class GitflowConfigurable implements Configurable {
     public static final String GITFLOW_USE_CUSTOM_HOTFIX_TAG_COMMIT_MESSAGE = "Gitflow.useCustomHotfixTagCommitMessage";
     public static final String GITFLOW_CUSTOM_HOTFIX_TAG_COMMIT_MESSAGE = "Gitflow.customHotfixTagCommitMessage";
 
+    public static final String GITFLOW_BUGFIX_FETCH_ORIGIN = "Gitflow.bugfixFetchOrigin";
+    public static final String GITFLOW_BUGFIX_KEEP_REMOTE = "Gitflow.bugfixKeepRemote";
+    public static final String GITFLOW_BUGFIX_KEEP_LOCAL = "Gitflow.bugfixKeepLocal";
+
     public static final String DEFAULT_TAG_COMMIT_MESSAGE ="Tagging version %name%";
     public static final String DEFAULT_TAG_HOTFIX_COMMIT_MESSAGE ="Tagging version %name%";
     Project project;
@@ -117,6 +121,19 @@ public class GitflowConfigurable implements Configurable {
         }
     }
 
+    /* bugfix */
+    // todo configuration
+    public static boolean bugfixFetchOrigin(Project project) {
+        return PropertiesComponent.getInstance(project).getBoolean(GitflowConfigurable.GITFLOW_BUGFIX_FETCH_ORIGIN, false);
+    }
+
+    public static boolean bugfixKeepRemote(Project project) {
+        return PropertiesComponent.getInstance(project).getBoolean(GitflowConfigurable.GITFLOW_BUGFIX_KEEP_REMOTE, false);
+    }
+
+    public static boolean bugfixKeepLocal(Project project) {
+        return PropertiesComponent.getInstance(project).getBoolean(GitflowConfigurable.GITFLOW_BUGFIX_KEEP_LOCAL, false);
+    }
 
 
     @Override

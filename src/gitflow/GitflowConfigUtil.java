@@ -23,6 +23,7 @@ public class GitflowConfigUtil {
     public static final String PREFIX_FEATURE = "gitflow.prefix.feature";
     public static final String PREFIX_RELEASE = "gitflow.prefix.release";
     public static final String PREFIX_HOTFIX = "gitflow.prefix.hotfix";
+    public static final String PREFIX_BUGFIX = "gitflow.prefix.bugfix";
     public static final String PREFIX_SUPPORT = "gitflow.prefix.support";
     public static final String PREFIX_VERSIONTAG = "gitflow.prefix.versiontag";
 
@@ -99,6 +100,20 @@ public class GitflowConfigUtil {
             NotifyUtil.notifyError(project, "Config error", e);
         }
         return hotfixPrefix;
+    }
+
+    public static String getBugfixPrefix(Project project) {
+        GitRepository repo = GitBranchUtil.getCurrentRepository(project);
+        VirtualFile root = repo.getRoot();
+
+        String bugfixPrefix = null;
+
+        try {
+            bugfixPrefix = GitConfigUtil.getValue(project, root, PREFIX_BUGFIX);
+        } catch (VcsException e) {
+            NotifyUtil.notifyError(project, "Config error", e);
+        }
+        return bugfixPrefix;
     }
 
     public static String getFeatureNameFromBranch(Project project, String branchName){

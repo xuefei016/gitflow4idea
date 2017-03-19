@@ -143,6 +143,18 @@ public class GitflowActions {
                 }
             }
 
+            //BUGFIX ACTIONS
+            actionGroup.addSeparator("Bugfix");
+            actionGroup.add(new StartBugfixAction());
+            if (branchUtil.isCurrentBranchBugfix()) {
+                actionGroup.add(new FinishBugfixAction());
+
+                //can't publish bugfix if it's already published
+                if (branchUtil.isCurrentBranchPublished() == false) {
+                    actionGroup.add(new PublishBugfixAction());
+                }
+            }
+
         }
 
         return actionGroup;

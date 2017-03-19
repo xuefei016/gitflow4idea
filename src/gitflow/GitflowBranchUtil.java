@@ -6,7 +6,6 @@ import git4idea.GitRemoteBranch;
 import git4idea.branch.GitBranchUtil;
 import git4idea.repo.GitRemote;
 import git4idea.repo.GitRepository;
-import gitflow.ui.AbstractBranchStartDialog;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class GitflowBranchUtil {
     String prefixFeature;
     String prefixRelease;
     String prefixHotfix;
+    String prefixBugfix;
 
     public GitflowBranchUtil(Project project){
         myProject=project;
@@ -41,6 +41,7 @@ public class GitflowBranchUtil {
             prefixFeature = GitflowConfigUtil.getFeaturePrefix(project);
             prefixRelease = GitflowConfigUtil.getReleasePrefix(project);
             prefixHotfix = GitflowConfigUtil.getHotfixPrefix(project);
+            prefixBugfix = GitflowConfigUtil.getBugfixPrefix(project);
         }
     }
 
@@ -85,6 +86,14 @@ public class GitflowBranchUtil {
 
     public boolean isBranchHotfix(String branchName){
         return branchName.startsWith(prefixHotfix);
+    }
+
+    public boolean isCurrentBranchBugfix() {
+        return isBranchBugfix(currentBranchName);
+    }
+
+    private boolean isBranchBugfix(String branchName) {
+        return branchName.startsWith(prefixBugfix);
     }
 
     //if no prefix specified, returns all remote branches
